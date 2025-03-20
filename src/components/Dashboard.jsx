@@ -1,19 +1,21 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Box, Typography } from "@mui/material";
 import LayoutA from "./LayoutA";
 import LayoutB from "./LayoutB";
-import { useSelector } from "react-redux";
+import useClicksTracker from "../hooks/useClicksTracker";
+import useScrollTracker from "../hooks/useScrollTracker";
 
-function Dashboard() {
-  const layout = useSelector((state) => state.ui.layout); // 'A' or 'B'
+const Dashboard = () => {
+  const layout = useSelector((state) => state.ui.layout);
+  useClicksTracker();
+  useScrollTracker();
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        Adaptive Frontend Dashboard
-      </h1>
+    <Box maxHeight="100vh">
       {layout === "A" ? <LayoutA /> : <LayoutB />}
-    </div>
+    </Box>
   );
-}
+};
 
 export default Dashboard;
